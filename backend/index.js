@@ -40,6 +40,12 @@ const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
 
+// 3. Rute untuk Keranjang Belanja
+// Semua rute yang dimulai dengan /api/cart akan ditangani oleh file cart.js
+const cartRoutes = require('./routes/cart');
+app.use('/api/cart', cartRoutes);
+
+
 // --- Menjalankan Server ---
 app.listen(port, () => {
   console.log(`Server backend berjalan di http://localhost:${port}`);
