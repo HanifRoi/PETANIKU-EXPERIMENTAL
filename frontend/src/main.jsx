@@ -19,6 +19,9 @@ import AddProductPage from './pages/AddProductPage.jsx';
 import EditProductPage from './pages/EditProductPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import EditProfilePage from './pages/EditProfilePage.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx'; 
+import PetaniRoute from './components/PetaniRoute.jsx';
+
 
 // Import semua komponen keamanan dan context
 import ProtectedRoute from './components/ProtectedRoute.jsx'; 
