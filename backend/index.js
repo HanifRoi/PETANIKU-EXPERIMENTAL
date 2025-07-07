@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 
 // Inisialisasi aplikasi Express
 const app = express();
-const port = 3001; // Port untuk server backend
 
 // --- Middleware ---
 // Mengizinkan permintaan dari domain lain (frontend kita)
@@ -44,12 +43,14 @@ app.use('/api/cart', cartRoutes);
 
 
 // 4. Rute untuk Pengguna (Profil)
-// Semua rute yang dimulai dengan /api/users akan ditangani oleh file users.js
 const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes);
 
 
 // --- Menjalankan Server ---
+// DIUBAH: Kode ini sekarang bisa beradaptasi dengan port dari Render
+// atau menggunakan port 3001 jika dijalankan secara lokal.
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
-  console.log(`Server backend berjalan di http://localhost:${port}`);
+  console.log(`Server backend berjalan di port ${port}`);
 });
