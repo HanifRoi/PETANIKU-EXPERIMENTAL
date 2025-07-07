@@ -67,7 +67,7 @@ function Navbar() {
               </NavLink>
               
               {isLoggedIn ? (
-                // DIUBAH: Menjadi menu dropdown
+                // Menu dropdown profil
                 <div className="relative" ref={profileMenuRef}>
                   <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center font-medium text-gray-700 focus:outline-none">
                     Halo, {user && user.nama ? user.nama.split(' ')[0] : 'Pengguna'}
@@ -76,7 +76,7 @@ function Navbar() {
                   {isProfileOpen && (
                     <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
                       {user && user.role === 'petani' && (
-                        <Link to="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsProfileOpen(false)}>Dashboard Petani</Link>
+                        <Link to="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsProfileOpen(false)}>Dasbor Petani</Link>
                       )}
                       <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsProfileOpen(false)}>Profil Saya</Link>
                       <button onClick={() => { logout(); setIsProfileOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
@@ -133,7 +133,7 @@ function Navbar() {
                    Masuk sebagai {user ? user.nama : ''}
                  </span>
                  {user && user.role === 'petani' && (
-                    <Link to="/dashboard" className="block w-full text-left text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsMenuOpen(false)}>Dashboard Petani</Link>
+                    <Link to="/dashboard" className="block w-full text-left text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsMenuOpen(false)}>Dasbor Petani</Link>
                  )}
                  <Link to="/profile" className="block w-full text-left text-gray-700 hover:text-green-600 px-3 py-2 rounded-md text-base font-medium" onClick={() => setIsMenuOpen(false)}>Profil Saya</Link>
                  <button onClick={() => { logout(); setIsMenuOpen(false); }} className="mt-1 block w-full text-left text-red-600 px-3 py-2 rounded-md text-base font-medium">Logout</button>
