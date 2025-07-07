@@ -18,16 +18,18 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import AddProductPage from './pages/AddProductPage.jsx';
-import EditProductPage from './pages/EditProductPage.jsx'; // Import halaman Edit Produk
+import EditProductPage from './pages/EditProductPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 
-// 3. Import komponen "Penjaga Pintu"
+// 3. Import kedua komponen "Penjaga Pintu"
 import ProtectedRoute from './components/ProtectedRoute.jsx'; 
+import PetaniRoute from './components/PetaniRoute.jsx';
 
 // 4. Import semua Provider Context
 import { CartProvider } from './context/CartContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 
-// 5. Buat konfigurasi router yang lengkap
+// 5. Buat konfigurasi router yang lengkap dengan keamanan berlapis
 const router = createBrowserRouter([
   {
     path: '/',
@@ -67,10 +69,21 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
 
-      // Grup rute yang dilindungi oleh ProtectedRoute
-      // Hanya pengguna dengan peran 'petani' yang bisa mengakses ini
+      // Grup rute untuk SEMUA PENGGUNA YANG LOGIN (Pembeli & Petani)
       {
-        element: <ProtectedRoute />,
+        element: <ProtectedRoute />, // Dijaga oleh Penjaga Pintu Umum
+        children: [
+          {
+            path: '/profile',
+            element: <ProfilePage />,
+          },
+          // Jika nanti ada halaman 'Riwayat Pesanan', tambahkan di sini
+        ]
+      },
+
+      // Grup rute KHUSUS UNTUK PETANI
+      {
+        element: <PetaniRoute />, // Dijaga oleh Penjaga Pintu Khusus Petani
         children: [
           {
             path: '/dashboard',
@@ -81,7 +94,7 @@ const router = createBrowserRouter([
             element: <AddProductPage />,
           },
           {
-            path: '/dashboard/edit-product/:productId', // Rute untuk halaman edit produk
+            path: '/dashboard/edit-product/:productId',
             element: <EditProductPage />,
           },
         ]
