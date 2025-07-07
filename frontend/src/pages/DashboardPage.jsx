@@ -17,7 +17,7 @@ function DashboardPage() {
     if (!token) return;
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3001/api/products/my-products', {
+      const response = await fetch('/api/products/my-products', {
         headers: { 'auth-token': token },
       });
       if (!response.ok) throw new Error('Gagal memuat produk.');
@@ -53,7 +53,7 @@ function DashboardPage() {
     if (!productToDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/products/${productToDelete._id}`, {
+      const response = await fetch(`/api/products/${productToDelete._id}`, {
         method: 'DELETE',
         headers: {
           'auth-token': token,

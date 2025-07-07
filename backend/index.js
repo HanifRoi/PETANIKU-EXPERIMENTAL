@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 
 // Inisialisasi aplikasi Express
 const app = express();
-const port = 3001; // Port untuk server backend
 
 // --- Middleware ---
 // Mengizinkan permintaan dari domain lain (frontend kita)
@@ -32,24 +31,28 @@ mongoose.connect(process.env.DATABASE_URL)
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-
 // 2. Rute untuk Produk
 const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
-
 
 // 3. Rute untuk Keranjang Belanja
 const cartRoutes = require('./routes/cart');
 app.use('/api/cart', cartRoutes);
 
-
 // 4. Rute untuk Pengguna (Profil)
-// Semua rute yang dimulai dengan /api/users akan ditangani oleh file users.js
 const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes);
 
 
-// --- Menjalankan Server ---
+// --- Penyesuaian untuk Vercel ---
+
+// Bagian app.listen dihapus karena Vercel akan menanganinya secara otomatis.
+/*
+const port = 3001;
 app.listen(port, () => {
   console.log(`Server backend berjalan di http://localhost:${port}`);
 });
+*/
+
+// Tambahkan baris ini agar Vercel bisa menggunakan aplikasi Express Anda.
+module.exports = app;

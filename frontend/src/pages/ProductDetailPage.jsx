@@ -18,7 +18,7 @@ function ProductDetailPage() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3001/api/products/${productId}`);
+        const response = await fetch(`/api/products/${productId}`);
         if (!response.ok) {
           throw new Error('Produk tidak ditemukan.');
         }

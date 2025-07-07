@@ -26,7 +26,7 @@ function AddProductPage() {
     setSuccess('');
 
     try {
-      const response = await fetch('http://localhost:3001/api/products', {
+      const response = await fetch('/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

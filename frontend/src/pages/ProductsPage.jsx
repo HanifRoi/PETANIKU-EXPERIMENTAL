@@ -12,7 +12,7 @@ function ProductsPage() {
     // Fungsi untuk mengambil data dari API
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/products');
+        const response = await fetch('/api/products');
         const data = await response.json();
         setProducts(data); // Simpan data dari API ke dalam state
       } catch (error) {

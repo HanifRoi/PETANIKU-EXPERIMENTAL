@@ -15,7 +15,7 @@ function EditProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/users/me', {
+        const response = await fetch('/api/users/me', {
           headers: { 'auth-token': token },
         });
         const data = await response.json();
@@ -35,7 +35,7 @@ function EditProfilePage() {
     e.preventDefault();
     setError(''); setSuccess('');
     try {
-      const response = await fetch('http://localhost:3001/api/users/me', {
+      const response = await fetch('/api/users/me', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'auth-token': token },
         body: JSON.stringify(userData),
@@ -53,7 +53,7 @@ function EditProfilePage() {
     e.preventDefault();
     setError(''); setSuccess('');
     try {
-      const response = await fetch('http://localhost:3001/api/users/change-password', {
+      const response = await fetch('/api/users/change-password', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'auth-token': token },
         body: JSON.stringify(passwordData),

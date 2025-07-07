@@ -29,7 +29,7 @@ export function CartProvider({ children }) {
       if (isLoggedIn && token) {
         setLoading(true);
         try {
-          const response = await fetch('http://localhost:3001/api/cart', {
+          const response = await fetch('/api/cart', {
             headers: { 'auth-token': token },
           });
           const data = await response.json();
@@ -49,7 +49,7 @@ export function CartProvider({ children }) {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      const response = await fetch('http://localhost:3001/api/cart/add', {
+      const response = await fetch('/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export function CartProvider({ children }) {
 
   const removeFromCart = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/cart/remove/${productId}`, {
+      const response = await fetch(`/api/cart/remove/${productId}`, {
         method: 'DELETE',
         headers: { 'auth-token': token },
       });
@@ -84,7 +84,7 @@ export function CartProvider({ children }) {
 
   const updateQuantity = async (productId, quantity) => {
     try {
-      const response = await fetch('http://localhost:3001/api/cart/update', {
+      const response = await fetch('/api/cart/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

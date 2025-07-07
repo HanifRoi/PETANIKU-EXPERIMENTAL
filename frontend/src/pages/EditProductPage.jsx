@@ -27,7 +27,7 @@ function EditProductPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/products/${productId}`);
+        const response = await fetch(`/api/products/${productId}`);
         if (!response.ok) {
           throw new Error('Produk tidak ditemukan atau gagal dimuat.');
         }
@@ -54,7 +54,7 @@ function EditProductPage() {
     setSuccess('');
 
     try {
-      const response = await fetch(`http://localhost:3001/api/products/${productId}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: 'PUT', // Gunakan metode PUT untuk memperbarui data
         headers: {
           'Content-Type': 'application/json',
