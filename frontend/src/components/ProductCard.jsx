@@ -7,16 +7,19 @@ function ProductCard({ product }) {
       style: 'currency',
       currency: 'IDR',
       minimumFractionDigits: 0
-    }).format(angka);
+    }).format(angka || 0);
   };
 
+  // Ambil nama petani dengan aman. 
+  // Ini memeriksa apakah product.petani ada DAN product.petani.nama ada.
+  const namaPetani = product.petani && product.petani.nama ? product.petani.nama : 'Petani';
+
   return (
-    // PASTIKAN MENGGUNAKAN product._id dari MongoDB
     <Link to={`/products/${product._id}`} className="block group"> 
       <div className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden group-hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
         <div className="overflow-hidden">
           <img 
-            src={product.gambar} 
+            src={product.gambar || 'https://placehold.co/600x400/cccccc/ffffff?text=Gambar'} 
             alt={product.nama} 
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" 
           />
@@ -25,11 +28,11 @@ function ProductCard({ product }) {
         <div className="p-5 flex flex-col flex-grow">
           <div className="flex-grow">
             <h3 className="text-lg font-bold text-gray-900 truncate">
-              {product.nama}
+              {product.nama || 'Nama Produk'}
             </h3>
             
             <p className="text-sm text-gray-500 mt-1">
-              oleh {product.petani}
+              oleh {namaPetani}
             </p>
             
             <div className="mt-4 flex items-center justify-between">
