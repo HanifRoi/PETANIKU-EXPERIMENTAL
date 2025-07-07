@@ -1,7 +1,6 @@
 // backend/index.js
 
-// Memuat variabel lingkungan dari file .env di paling atas (hanya untuk pengembangan lokal)
-// Di Vercel, variabel lingkungan diatur langsung di dashboard Vercel.
+// Memuat variabel lingkungan dari file .env di paling atas
 require('dotenv').config(); 
 
 // Mengimpor paket-paket yang dibutuhkan
@@ -11,20 +10,17 @@ const mongoose = require('mongoose');
 
 // Inisialisasi aplikasi Express
 const app = express();
-// const port = 3001; // Port ini hanya relevan untuk pengembangan lokal, tidak digunakan di Vercel
+const port = 3001; // Port untuk server backend
 
 // --- Middleware ---
 // Mengizinkan permintaan dari domain lain (frontend kita)
-// Untuk produksi, sebaiknya ganti '*' dengan domain frontend Vercel Anda (misal: 'https://petaniku-experimental.vercel.app')
 app.use(cors());
 // Memungkinkan server untuk membaca body request dalam format JSON
 app.use(express.json());
 
 
 // --- Koneksi ke Database MongoDB Atlas ---
-// PENTING: Pastikan nama variabel lingkungan di Vercel sama dengan yang di sini.
-// Kita menggunakan MONGODB_URI sesuai yang sudah Anda atur di Vercel.
-mongoose.connect(process.env.MONGODB_URI) // <-- PERBAIKAN DI SINI!
+mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log('Berhasil terhubung ke MongoDB Atlas'))
   .catch((error) => console.error('Koneksi database gagal:', error));
 // -----------------------------------------
@@ -53,14 +49,7 @@ const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes);
 
 
-// --- Menjalankan Server (Hanya untuk Pengembangan Lokal) ---
-// Bagian ini tidak akan dieksekusi oleh Vercel.
-// Vercel akan menjalankan 'app' sebagai fungsi serverless.
-/*
+// --- Menjalankan Server ---
 app.listen(port, () => {
   console.log(`Server backend berjalan di http://localhost:${port}`);
 });
-*/
-
-// PENTING: Ekspor aplikasi Express agar Vercel dapat menjalankannya sebagai fungsi serverless.
-module.exports = app; // <-- PERBAIKAN PENTING DI SINI!
