@@ -1,7 +1,8 @@
-// src/App.jsx (Mode Aman untuk Tes)
+// src/App.jsx
 import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
-// import Notification from './components/Notification'; // Dinonaktifkan sementara
+// PASTIKAN NAMA FILE DAN IMPORT-NYA SAMA PERSIS (misal: huruf kecil semua)
+import Navbar from './components/navbar.jsx'; 
+import Notification from './components/notification.jsx';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <main>
         <Outlet />
       </main>
-      {/* <Notification /> */}
+      <Notification />
     </div>
   );
 }
