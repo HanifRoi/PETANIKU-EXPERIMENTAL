@@ -1,58 +1,45 @@
 // backend/index.js
-
-// Memuat variabel lingkungan dari file .env di paling atas
 require('dotenv').config(); 
-
-// Mengimpor paket-paket yang dibutuhkan
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path'); // 1. Import 'path'
 
-// Inisialisasi aplikasi Express
 const app = express();
 
-// --- Middleware ---
-// Mengizinkan permintaan dari domain lain (frontend kita)
 app.use(cors());
-// Memungkinkan server untuk membaca body request dalam format JSON
 app.use(express.json());
 
-
-// --- Koneksi ke Database MongoDB Atlas ---
 mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log('Berhasil terhubung ke MongoDB Atlas'))
   .catch((error) => console.error('Koneksi database gagal:', error));
-// -----------------------------------------
 
-
-// === Menggunakan Rute-Rute API ===
-
-// 1. Rute untuk Otentikasi (Register & Login)
+// --- Menggunakan Rute-Rute API ---
 const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
-
-// 2. Rute untuk Produk
 const productRoutes = require('./routes/products');
-app.use('/api/products', productRoutes);
-
-// 3. Rute untuk Keranjang Belanja
 const cartRoutes = require('./routes/cart');
-app.use('/api/cart', cartRoutes);
-
-// 4. Rute untuk Pengguna (Profil)
 const userRoutes = require('./routes/users');
+
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 app.use('/api/users', userRoutes);
 
+// --- PENYESUAIAN UNTUK VERCEL ---
 
-// --- Penyesuaian untuk Vercel ---
+// 2. Sajikan file statis dari build frontend
+// Ini memberitahu Express untuk menyajikan file-file seperti gambar, css, js
+// yang ada di dalam folder build frontend.
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// Bagian app.listen dihapus karena Vercel akan menanganinya secara otomatis.
-/*
-const port = 3001;
-app.listen(port, () => {
-  console.log(`Server backend berjalan di http://localhost:${port}`);
+// 3. Aturan "Catch-All"
+// Ini adalah aturan paling penting. Artinya, untuk semua permintaan GET
+// yang TIDAK cocok dengan rute API di atas, kirimkan saja file index.html
+// dari frontend. Ini memungkinkan React Router untuk mengambil alih.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
-*/
 
-// Tambahkan baris ini agar Vercel bisa menggunakan aplikasi Express Anda.
+
+// Bagian app.listen tidak lagi dibutuhkan untuk Vercel
 module.exports = app;
