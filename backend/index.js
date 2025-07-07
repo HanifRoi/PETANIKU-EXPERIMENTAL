@@ -29,21 +29,24 @@ mongoose.connect(process.env.DATABASE_URL)
 // === Menggunakan Rute-Rute API ===
 
 // 1. Rute untuk Otentikasi (Register & Login)
-// Semua rute yang dimulai dengan /api/auth akan ditangani oleh file auth.js
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
 
 // 2. Rute untuk Produk
-// Semua rute yang dimulai dengan /api/products akan ditangani oleh file products.js
 const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
 
 // 3. Rute untuk Keranjang Belanja
-// Semua rute yang dimulai dengan /api/cart akan ditangani oleh file cart.js
 const cartRoutes = require('./routes/cart');
 app.use('/api/cart', cartRoutes);
+
+
+// 4. Rute untuk Pengguna (Profil)
+// Semua rute yang dimulai dengan /api/users akan ditangani oleh file users.js
+const userRoutes = require('./routes/users');
+app.use('/api/users', userRoutes);
 
 
 // --- Menjalankan Server ---

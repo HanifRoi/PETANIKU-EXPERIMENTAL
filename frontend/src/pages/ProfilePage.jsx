@@ -29,11 +29,11 @@ function ProfilePage() {
             <p className="text-gray-500">{user.email}</p>
           </div>
         </div>
-
+        
         {/* Detail Akun */}
         <div className="mt-8 bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Detail Akun</h2>
-          <div className="space-y-4">
+          <div className="space-y-4 mb-6"> {/* Tambah mb-6 untuk spasi sebelum tombol */}
             <div className="flex items-center gap-4">
               <UserIcon className="text-gray-400" />
               <span className="text-gray-700">Nama: {user.nama}</span>
@@ -47,6 +47,13 @@ function ProfilePage() {
               <span className="text-gray-700">Peran: <span className="font-semibold capitalize bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">{user.role}</span></span>
             </div>
           </div>
+          {/* Perubahan di sini: Kelas CSS untuk tombol Edit Profil agar kecil seperti tombol Dashboard */}
+          <Link 
+            to="/profile/edit" 
+            className="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Edit Profil
+          </Link>
         </div>
 
         {/* Bagian Khusus Berdasarkan Peran */}
