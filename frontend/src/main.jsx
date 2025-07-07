@@ -20,6 +20,7 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import AddProductPage from './pages/AddProductPage.jsx';
 import EditProductPage from './pages/EditProductPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import EditProfilePage from './pages/EditProfilePage.jsx'; // Import halaman Edit Profil
 
 // 3. Import kedua komponen "Penjaga Pintu"
 import ProtectedRoute from './components/ProtectedRoute.jsx'; 
@@ -29,7 +30,7 @@ import PetaniRoute from './components/PetaniRoute.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 
-// 5. Buat konfigurasi router yang lengkap dengan keamanan berlapis
+// 5. Buat konfigurasi router yang lengkap
 const router = createBrowserRouter([
   {
     path: '/',
@@ -77,7 +78,10 @@ const router = createBrowserRouter([
             path: '/profile',
             element: <ProfilePage />,
           },
-          // Jika nanti ada halaman 'Riwayat Pesanan', tambahkan di sini
+          {
+            path: '/profile/edit', // Rute untuk halaman edit profil
+            element: <EditProfilePage />,
+          },
         ]
       },
 
