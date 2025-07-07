@@ -7,17 +7,21 @@
       },
       {
         "src": "frontend/package.json",
-        "use": "@vercel/static-build"
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "frontend/dist" 
+        }
       }
     ],
-    "rewrites": [
+    "routes": [
       {
-        "source": "/api/(.*)",
-        "destination": "/backend/index.js"
+        "src": "/api/(.*)",
+        "dest": "backend/index.js"
       },
       {
-        "source": "/(.*)",
-        "destination": "/index.html"
+        "src": "/(.*)",
+        "dest": "/index.html"
       }
     ]
   }
+  
