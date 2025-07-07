@@ -21,7 +21,8 @@ function LoginPage() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      // PERBAIKAN DI SINI: Mengubah URL API dari absolut ke relatif
+      const response = await fetch('/api/auth/login', { // <-- INI PERUBAHANNYA!
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
